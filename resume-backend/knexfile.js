@@ -1,12 +1,12 @@
 // Update with your config settings.
-
+require('dotenv').config()
 module.exports = {
   development: {
     client: "mysql",
     connection: {
       host: "localhost",
       user: process.env.DB_USERNAME,
-      password: peocess.env.DB_PASSWORD,
+      password: process.env.DB_PASSWORD,
       database: "resume_creator",
     },
     migration: {
