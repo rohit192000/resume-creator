@@ -2,11 +2,11 @@ exports.up = function (knex) {
   return knex.schema.createTable("education_detail", (table) => {
     table.increments("id").unsigned().primary();
 
-    table.integer("personal_detail_id").unsigned().notNullable();
+    table.integer("user_id").unsigned().notNullable();
     table
-      .foreign("personal_detail_id", "user_education_detail")
+      .foreign("user_id", "user_education_detail")
       .references("id")
-      .inTable("personal_detail")
+      .inTable("user")
       .onUpdate("RESTRICT")
       .onDelete("RESTRICT");
     table.string("college/uni", 50).notNullable();
