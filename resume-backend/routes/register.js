@@ -3,7 +3,7 @@ const router = express.Router();
 const register = require("../controllers/register");
 
 router.post(
-  "/user/:email/:password",
+  "/user/:name/:email/:password",
   register,
 
 );

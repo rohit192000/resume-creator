@@ -5,20 +5,21 @@ const experienceController = async (req, res, next) => {
     var experience = [
       {
         company_name: "MVT",
-        year_of_experience: 3,
+        year_of_experience: 4,
       },
     ];
     experience = JSON.stringify(experience);
     console.log(experience);
-    var resp = await Personal_Detail.where({
-      id: req.user.id,
-    })
+    var resp = await Personal_Detail
+      .where("user_id", "=", req.user.id)
       .save(
         {
           experience: experience,
         },
         {
+          method: "update",
           patch: true,
+          debug: true,
         }
       )
       .then((data) => {
@@ -28,17 +29,17 @@ const experienceController = async (req, res, next) => {
           experience: data,
         });
       })
-      .catch((err) => {
-        console.log(err);
+      .catch(async (err) => {
+        await Personal_Detail.where("user_id", "=", req.user.id)
+          .fetch({ columns: ["experience"] })
+          .then((data) => {
+            res.status(200).json({
+              response: true,
+              message: "Experience Details added successfully",
+              experience: data,
+            });
+          });
       });
-    // console.log(resp);
-    // if (resp) {
-    // res.status(200).json({
-    //   response: true,
-    //   message: "Experience Details added successfully",
-    //   experience: resp.toJSON(),
-    // });
-    // }
   } catch (err) {
     console.log(err);
     next();
@@ -46,16 +47,3 @@ const experienceController = async (req, res, next) => {
 };
 
 module.exports = experienceController;
-
-// var resp = await FoodType.where({ id: data.id }).save(
-//   {
-//     name: data.name,
-//     status: data.status,
-//   },
-//   { patch: true }
-// );
-// res.json({
-//   response: true,
-//   data: messages.FOOD_TYPE_UPDATED,
-//   resp: resp.toJSON(),
-// });

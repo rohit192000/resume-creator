@@ -5,6 +5,7 @@ const registerController = async (req, res, next) => {
   try {
     var user_email = req.params.email;
     var password = req.params.password;
+    var user_name = req.params.name;
 
     // checks fields are empty or not
     if (!(user_email, password)) {
@@ -34,6 +35,7 @@ const registerController = async (req, res, next) => {
     if (!registeredUser) {
       var encryptPassword = await bcrypt.hash(password, 10);
       const users = await new User({
+        name : user_name,
         email: user_email,
         password: encryptPassword,
       }).save();
