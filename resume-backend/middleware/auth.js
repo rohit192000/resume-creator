@@ -10,16 +10,20 @@ var jwtOptions = {};
 jwtOptions.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
 jwtOptions.secretOrKey = process.env.SECRET_KEY;
 
-var strategy = new JwtStrategy(jwtOptions, async (jwt_payload, done) => {
-  console.log("payload recieved", jwt_payload);
-  var user = User.where({ id: jwt_payload.user_id });
-  if (user) {
-    user = await user.fetch({columns : ['id', 'email']});
-    user = user.toJSON();
-    done(null, user);
-  } else {
-    done(null, user);
-  }
-});
+try {
+  var strategy = new JwtStrategy(jwtOptions, async (jwt_payload, done) => {
+    console.log("payload recieved", jwt_payload);
+    var user = User.where({ id: jwt_payload.user_id });
+    if (user) {
+      user = await user.fetch({ columns: ["id", "email"] });
+      user = user.toJSON();
+      done(null, user);
+    } else {
+      done(null, user);
+    }
+  });
+} catch (err) {
+  console.log(err);
+}
 
 passport.use(strategy);

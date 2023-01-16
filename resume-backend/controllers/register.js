@@ -3,9 +3,9 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const registerController = async (req, res, next) => {
   try {
-    var user_email = req.params.email;
-    var password = req.params.password;
-    var user_name = req.params.name;
+    var user_email = req.body.email;
+    var password = req.body.password;
+    var user_name = req.body.name;
 
     // checks fields are empty or not
     if (!(user_email, password)) {
@@ -48,10 +48,12 @@ const registerController = async (req, res, next) => {
           expiresIn: "6h",
         }
       );
-      user.token = token;
       res.status(201).json({
-        messsage: "User Registered successfully",
-        user: user,
+        message: "User Registered successfully",
+        user: {
+          email : user.email,
+          token : token
+        },
       });
     }
   } catch (err) {

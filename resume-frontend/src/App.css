@@ -158,8 +158,8 @@
     url("./Images/signup.jpg");
   background-size: cover;
   background-repeat: no-repeat;
-  height: 70vh;
-  width: calc(100% - 78%);
+  height: 80vh;
+  width: calc(100% - 70%);
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -179,6 +179,16 @@
   align-items: center;
 }
 
+.alert {
+  margin-top: 10px;
+  border-radius: 5px;
+  width: calc(100% - 5em);
+  font-weight: bold;
+  color: white;
+}
+.alert-danger {
+  background-color: #eb5d5d;
+}
 .auth-button {
   width: calc(100% - 10rem);
   border-radius: 10px;
@@ -202,25 +212,31 @@
 
 /* resume_form */
 
+@supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
+  .container {
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+  }
+}
+
+/* personal_detail.js */
 .personal-detail {
-  background-image: linear-gradient(
-      to bottom,
-      rgba(253, 253, 252, 0.5),
-      rgba(50, 50, 78, 0.5)
-    ),
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.8)),
     url("./Images/personal.jpg");
   background-size: 100%;
   background-repeat: no-repeat;
 }
+
 .detail-form {
-  height: 70vh;
-  width: calc(100% / 4);
+  height: 85vh;
+  width: calc(100% - 60%);
   display: flex;
   align-items: center;
   justify-content: space-evenly;
   flex-direction: column;
-  border: 2px solid #000;
   border-radius: 20px;
+  box-shadow: rgba(150, 150, 150, 0.16) 0px 3px 6px,
+    rgba(133, 133, 133, 0.23) 0px 3px 6px;
 }
 
 .input-field {
@@ -228,6 +244,34 @@
   height: 3rem;
   width: calc(100% - 5em);
   border-radius: 7px;
+}
+.contact-div {
+  width: 93%;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+.contact {
+  border-left: 0px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.country-code-select-field {
+  padding-bottom: 1px;
+  height: 100%;
+  width: 8%;
+  border-top: 2px solid #000;
+  border-left: 2px solid #000;
+  border-bottom: 2px solid #767676;
+  border-right: 0;
+  border-radius: 7px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  background-color: white;
+}
+.contact:focus,
+.country-code-select-field:focus {
+  outline: none;
 }
 
 .personal-detail-fieldset {
@@ -249,6 +293,59 @@
 
 /* Education_Detail.js */
 
+.education-detail {
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.8)),
+    url("./Images/personal.jpg");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.education-form {
+  width: calc(100% / 2);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: column;
+  border-radius: 20px;
+  box-shadow: rgba(150, 150, 150, 0.16) 0px 3px 6px,
+    rgba(133, 133, 133, 0.23) 0px 3px 6px;
+  padding: 2% 0px;
+}
+.education-form-div {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.college-div{
+  height: 3.4rem;
+  width : 93%;
+}
+.college {
+  border-right: 0px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.college-select-field {
+  height: 100%;
+  width: 8%;
+  border-top: 2px solid #000;
+  border-left: 2px solid #000;
+  border-bottom: 2px solid #767676;
+  border-left: 0;
+  border-radius: 7px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  background-color: white;
+}
+.college:focus,
+.college-select-field:focus {
+  outline: none;
+}
+
 .education-fieldset {
   display: flex;
   background-color: white;
@@ -262,22 +359,37 @@
   flex-flow: row wrap;
 }
 
-.select-field {
+.margin-bottom-5 {
+  margin-bottom: 5%;
+}
+.input-button {
+  width: 40%;
+  margin: 10px;
 }
 
-@media (width <= 425px) {
+/* @media (width <= 425px) {
   .register-form {
     width: calc(100% - 10%);
   }
   .auth-button {
     font-size: 100%;
   }
-}
+} */
 
-@media (426px <= width <= 540px) {
+@media (width <= 540px) {
   .register-form {
     width: calc(100% - 20%);
     padding-top: 15%;
+  }
+
+  .detail-form {
+    width: 90%;
+  }
+  .contact-div {
+    width: 86%;
+  }
+  .country-code-select-field {
+    width: 17%;
   }
   .auth-button {
     font-size: calc(100% - 10%);
@@ -303,11 +415,31 @@
     font-size: 100%;
     width: calc(100% - 5rem);
   }
+  .detail-form {
+    width: calc(100% - 30%);
+    height: 80vh;
+  }
+  .country-code-select-field {
+    width: 11%;
+  }
+  .contact-div {
+    width: 91%;
+  }
 }
 @media (769px <= width <= 1024px) {
   .register-form {
     width: calc(100% - 50%);
     height: 80vh;
+  }
+  .detail-form {
+    width: calc(100% - 40%);
+    height: 80vh;
+  }
+  .country-code-select-field {
+    width: 12%;
+  }
+  .contact-div {
+    width: 91%;
   }
   .auth-button {
     font-size: 35px;
@@ -323,6 +455,12 @@
 @media (1026px <= width <= 1440px) {
   .register-form {
     width: calc(100% - 60%);
+  }
+  .contact-div {
+    width: 91%;
+  }
+  .country-code-select-field {
+    width: 12%;
   }
   .auth-button {
     font-size: 35px;

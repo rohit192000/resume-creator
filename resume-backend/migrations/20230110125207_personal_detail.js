@@ -14,6 +14,7 @@ exports.up = function (knex) {
     table.string("email", 50).notNullable();
     table.string("phone_number", 15).notNullable();
     table.string("gender", 10).notNullable();
+    table.string("date_of_birth", 50).notNullable();
     table.json("experience").default(null);
   });
 };
