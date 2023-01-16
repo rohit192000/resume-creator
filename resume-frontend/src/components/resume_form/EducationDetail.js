@@ -35,33 +35,26 @@ const EducationDetail = () => {
         <form className="education-form bg-white ">
           {count.map((data, index) => (
             <div key={index + Math.random()} className="education-form-div">
-              <h3 className="margin-0">Education {index + 1}</h3>
-              <div className="college-div margin-bottom-5">
+              <h3 className="margin-0 margin-bottom-5">Education {index + 1}</h3>
                 <input
-                  className="college input-field"
-                  name="college"
+                  className="input-field margin-bottom-5"
                   placeholder="Select Your College..."
-                  id="college"
                   type="text"
+                  list="college"
                 />
-                <select
-                  className="college-select-field bg-white "
+                <datalist
                   id="college"
                   name="college"
                 >
                   <optgroup>
                     <option value=""></option>
                     {names.map((data, index) => (
-                      <option
-                        key={index}
-                        value={data.college_name}
-                      >
+                      <option key={index} value={data.college_name}>
                         {data.college_name}
                       </option>
                     ))}
                   </optgroup>
-                </select>
-              </div>
+                </datalist>
               <input
                 className="input-field margin-bottom-5"
                 type="text"

@@ -320,31 +320,6 @@
   align-items: center;
   flex-direction: column;
 }
-.college-div{
-  height: 3.4rem;
-  width : 93%;
-}
-.college {
-  border-right: 0px;
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-}
-.college-select-field {
-  height: 100%;
-  width: 8%;
-  border-top: 2px solid #000;
-  border-left: 2px solid #000;
-  border-bottom: 2px solid #767676;
-  border-left: 0;
-  border-radius: 7px;
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
-  background-color: white;
-}
-.college:focus,
-.college-select-field:focus {
-  outline: none;
-}
 
 .education-fieldset {
   display: flex;
