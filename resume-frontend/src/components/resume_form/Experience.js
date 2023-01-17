@@ -43,7 +43,7 @@ const Experience = () => {
               />
               <input
                 className="input-field margin-bottom-5"
-                type="text"
+                type="number"
                 name="year_of_experience"
                 id="year_of_experience"
                 placeholder="Enter Y.O.E"

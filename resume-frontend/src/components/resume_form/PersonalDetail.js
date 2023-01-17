@@ -40,6 +40,7 @@ const PersonalDetail = () => {
 
   useEffect(() => {
   }, [personalDetail]);
+  console.log('jfjd')
   return (
     <>
       <div className="personal-detail bg-lt-purple">

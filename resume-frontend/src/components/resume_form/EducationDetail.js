@@ -7,113 +7,253 @@ const EducationDetail = () => {
       .get("http://localhost:3001/education-detail/college-names")
       .then((response) => {
         setNames((prevState) => response.data.names);
-        console.log(response.data);
+        // console.log(response.data);
       });
   }, []);
   const [count, setCount] = useState([1]);
-  const addCount = (index) => {
+  const addCount = () => {
     if (count.length < 3) {
-      setCount((prevState) => [...prevState, Number(count[index]) + 1]);
+      setCount((prevState) => [
+        ...prevState,
+        Number(count[count.length - 1]) + 1,
+      ]);
+      setEducationDetail((prevState) => [
+        ...prevState,
+        {
+          "college/uni": "",
+          passing_year: "",
+          marks: "",
+          graduation: false,
+          post_graduation: false,
+        },
+      ]);
+      console.log("edSatteOnFunction : ", educationDetails);
     }
     console.log(count);
   };
 
-  const deleteEducation = (index) => {
+  const removeEducation = (index) => {
     console.log(count.length);
     if (count.length > 1) {
+      educationDetails.splice(index, 1);
       let newCount = count.filter((data) => {
         return data !== count[index];
       });
       console.log(newCount);
       setCount((prevState) => newCount);
     }
+    if (count.length === 1) {
+      setEducationDetail((prevState) => [
+        {
+          "college/uni": "",
+          passing_year: "",
+          marks: "",
+          graduation: false,
+          post_graduation: false,
+        },
+      ]);
+    }
+  };
+  const handleChange = (e, name, index1) => {
+    console.log(name);
+    setEducationDetail((prevState) => {
+      const newState = prevState.map((obj, index) => {
+        if (index === index1) {
+          return { ...obj, [name]: e.target.value };
+        }
+        return obj;
+      });
+      console.log(newState);
+      return newState;
+    });
+  };
+  const [educationDetails, setEducationDetail] = useState([
+    {
+      "college/uni": "",
+      passing_year: "",
+      marks: "",
+      graduation: false,
+      post_graduation: false,
+    },
+  ]);
+
+  const addEducation = (e) => {
+    e.preventDefault();
+    console.log(educationDetails);
   };
   return (
     <>
       <div className="education-detail bg-lt-purple ">
         <h1 className="white">Education Detail</h1>
-        <form className="education-form bg-white ">
-          {count.map((data, index) => (
-            <div key={index + Math.random()} className="education-form-div">
-              <h3 className="margin-0 margin-bottom-5">Education {index + 1}</h3>
+        <form className="education-form bg-white " onSubmit={addEducation}>
+          <div className="education-form-div">
+            {count.map((data, index) => (
+              <React.Fragment key={index + Math.random()}>
+                <h3 className="margin-0 margin-bottom-5">
+                  Education {index + 1}
+                </h3>
                 <input
+                key="college"
                   className="input-field margin-bottom-5"
                   placeholder="Select Your College..."
                   type="text"
                   list="college"
+                  name="college/uni"
+                  value={educationDetails[index]["college/uni"]}
+                  onChange={(e) => {
+                    setEducationDetail((prevState) => {
+                      const newState = prevState.map((obj, index1) => {
+                        if (index === index1) {
+                          return { ...obj, "college/uni": e.target.value };
+                        }
+                        return obj;
+                      });
+                      console.log(newState);
+                      return newState;
+                    });
+                  }}
                 />
-                <datalist
-                  id="college"
-                  name="college"
-                >
+                <datalist id="college" name="college">
                   <optgroup>
                     <option value=""></option>
                     {names.map((data, index) => (
-                      <option key={index} value={data.college_name}>
+                      <option
+                        key={index + Math.random()}
+                        value={data.college_name}
+                      >
                         {data.college_name}
                       </option>
                     ))}
                   </optgroup>
                 </datalist>
-              <input
-                className="input-field margin-bottom-5"
-                type="text"
-                name="passing_year"
-                id="passing_year"
-                placeholder="Enter your passing year"
-              />
-              <input
-                className="input-field margin-bottom-5"
-                type="text"
-                name="marks"
-                id="marks"
-                placeholder="Enter Passing Marks"
-              />
 
-              <fieldset className="personal-detail-fieldset margin-bottom-5">
-                <legend>Type</legend>
                 <input
-                  type="radio"
-                  name="education_type"
-                  value="1"
-                  id="graduation"
+                  className="input-field margin-bottom-5"
+                  type="text"
+                  name="passing_year"
+                  id="passing_year"
+                  placeholder="Enter your passing year"
+                  value={
+                    educationDetails[index] !== undefined
+                      ? educationDetails[index]["passing_year"]
+                      : " "
+                  }
+                  onChange={(e) => {
+                    handleChange(e, e.target.name, index);
+                  }}
                 />
-                <label htmlFor="graduation">Graduation</label>
+
                 <input
-                  type="radio"
-                  name="education_type"
-                  value="1"
-                  id="post_graduation"
+                  className="input-field margin-bottom-5"
+                  type="text"
+                  name="marks"
+                  id="marks"
+                  value={
+                    educationDetails[index] !== undefined
+                      ? educationDetails[index]["marks"]
+                      : ""
+                  }
+                  placeholder="Enter Passing Marks"
+                  onChange={(e) => {
+                    handleChange(e, e.target.name, index);
+                  }}
                 />
-                <label htmlFor="post_graduation">Post Graduation</label>
-              </fieldset>
-              <div
-                className="margin-bottom-5"
-                style={{
-                  width: "100%",
-                }}
+
+                <fieldset
+                  className="personal-detail-fieldset margin-bottom-5"
+                  onChange={(e) => {
+                    console.log(e.target.value);
+                    if (e.target.value === "graduation") {
+                      setEducationDetail((prevState) => {
+                        const newState = prevState.map((obj, index1) => {
+                          if (
+                            e.target.value === "graduation" &&
+                            index1 === index
+                          ) {
+                            return {
+                              ...obj,
+                              graduation: true,
+                              post_graduation: false,
+                            };
+                          }
+                          return obj;
+                        });
+                        console.log(newState);
+                        return newState;
+                      });
+                    } else {
+                      setEducationDetail((prevState) => {
+                        const newState = prevState.map((obj, index1) => {
+                          if (
+                            e.target.value === "post_graduation" &&
+                            index1 === index
+                          ) {
+                            return {
+                              ...obj,
+                              graduation: false,
+                              post_graduation: true,
+                            };
+                          }
+                          return obj;
+                        });
+                        console.log(newState);
+                        return newState;
+                      });
+                    }
+                  }}
+                >
+                  <legend>Type</legend>
+                  <input
+                    type="radio"
+                    name={"education_type" + index}
+                    value="graduation"
+                    id="graduation"
+                    checked={educationDetails[index]["graduation"]}
+                    onChange={() => {}}
+                  />
+                  <label htmlFor="graduation">Graduation</label>
+                  <input
+                    type="radio"
+                    name={"education_type" + index}
+                    value="post_graduation"
+                    id="post_graduation"
+                    checked={educationDetails[index]["post_graduation"]}
+                    onChange={() => {}}
+                  />
+                  <label htmlFor="post_graduation">Post Graduation</label>
+                </fieldset>
+
+                <button
+                  className="input-field bg-lt-purple margin-bottom-5"
+                  type="button"
+                  onClick={() => removeEducation(index)}
+                >
+                  REMOVE EDUCATION
+                </button>
+              </React.Fragment>
+            ))}
+            <div
+              className="margin-bottom-5"
+              style={{
+                width: "100%",
+              }}
+            >
+              <button
+                className="input-field input-button bg-lt-purple"
+                type="button"
+                onClick={() => addCount()}
               >
-                <button
-                  className="input-field input-button bg-lt-purple"
-                  type="button"
-                  onClick={() => addCount(index)}
-                >
-                  ADD EDUCATION
-                </button>
-                <button
-                  className="input-field input-button bg-lt-purple"
-                  type="button"
-                  onClick={() => deleteEducation(index)}
-                >
-                  DELETE EDUCATION
-                </button>
-              </div>
-            </div>
-          ))}
+                ADD EDUCATION
+              </button>
 
-          <button className="input-field bg-lt-purple" type="submit">
-            SUBMIT DETAILS
-          </button>
+              <button
+                className="input-field input-button bg-lt-purple"
+                type="submit"
+              >
+                SUBMIT DETAILS
+              </button>
+            </div>
+          </div>
         </form>
       </div>
     </>
