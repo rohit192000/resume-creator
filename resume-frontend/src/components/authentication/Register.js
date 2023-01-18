@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 const Register = () => {
@@ -7,37 +7,45 @@ const Register = () => {
     email: "",
     password: "",
   });
+  const errorRef = useRef();
   const navi = useNavigate();
+  const [errorMessage, setErrMsg] = useState("");
   // regex for validations
-  var nameRegex = /^([a-zA-Z ]){3,}$/;
-  var emailRegex = /^([a-zA-Z0-9+_.-]+){2,}[@]+[a-zA-Z0-9.-]+$/;
+  var nameRegex =
+    /^([A-Z]+)([a-z]+){2,10}[\s]+([A-Z]+)([a-z]+){2,10}([\s]*[A-Z]*([a-z]*){2,10})$/;
 
-  const register = (e) => {
+  const register = async (e) => {
     e.preventDefault();
-    console.log("hello");
-    console.log(nameRegex.test(newUser.name));
-    if (!nameRegex.test(newUser.name) && !emailRegex.test(newUser.email)) {
-      alert("Patterns invalid");
-      return;
-    }
     if (newUser.name && newUser.email && newUser.password) {
+      if (!nameRegex.test(newUser.name)) {
+        await setErrMsg((prevState) => "Name should be in correct format");
+        return (errorRef.current.style.display = "block");
+      }
       axios
         .post("http://localhost:3001/register/newuser", newUser)
-        .then((response) => {
-          console.log(response.data);
-          alert(response.data.message);
+        .then(async (response) => {
           if (response.data.user) {
-            localStorage.setItem("token", response.data.user.token);
-            navi("/personal-detail");
-          } else {
-            setNewUser((prevState) => ({
+            await setNewUser((prevState) => ({
               ...prevState,
               name: "",
               email: "",
               password: "",
             }));
+            localStorage.setItem("token", response.data.user.token);
+            navi("/personal-detail");
+          } else {
+            await setErrMsg((prevState) => response.data.message);
+            await setNewUser((prevState) => ({
+              ...prevState,
+              email: "",
+              password: "",
+            }));
+            return (errorRef.current.style.display = "block");
           }
         });
+    } else {
+      await setErrMsg((prevState) => "Please fill all the fields");
+      return (errorRef.current.style.display = "block");
     }
   };
 
@@ -45,6 +53,21 @@ const Register = () => {
     <>
       <div className="register bg-lt-purple">
         <form className="bg-cream register-form" onSubmit={register}>
+          {errorMessage && (
+            <div className="alert alert-danger" ref={errorRef}>
+              <span
+                className="closebtn"
+                onClick={(e) => {
+                  // console.log(e)
+                  // setErrMsg((prevState) => null);
+                  e.target.parentElement.style.display = "none";
+                }}
+              >
+                &times;
+              </span>
+              {errorMessage}
+            </div>
+          )}
           <div className="input-div">
             <label className="black" htmlFor="username">
               Name
@@ -56,6 +79,7 @@ const Register = () => {
               id="username"
               type="text"
               value={newUser.name}
+              autoComplete="off"
               onChange={(e) =>
                 setNewUser((prevState) => ({
                   ...prevState,
@@ -63,17 +87,6 @@ const Register = () => {
                 }))
               }
             />
-            {!newUser.name ? (
-              <div className="alert alert-danger">
-                Name field should be filled
-              </div>
-            ) : (
-              !nameRegex.test(newUser.name) && (
-                <div className="alert alert-danger">
-                  Name must be greater than 2 character
-                </div>
-              )
-            )}
           </div>
           <div className="input-div">
             <label className="black" htmlFor="useremail">
@@ -85,7 +98,8 @@ const Register = () => {
               value={newUser.email}
               placeholder="Enter Your Email..."
               id="useremail"
-              type="email"
+              type="text"
+              autoComplete="off"
               onChange={(e) =>
                 setNewUser((prevState) => ({
                   ...prevState,
@@ -93,22 +107,6 @@ const Register = () => {
                 }))
               }
             />
-            {!newUser.email ? (
-              <div className="alert alert-danger">
-                Email field should be filled
-              </div>
-            ) : (
-              !emailRegex.test(newUser.email) && (
-                <div className="alert alert-danger">
-                  Email must contain @ after username
-                  <br />
-                  It must contain domain after @ like (google, yahoo etc...)
-                  <br />
-                  It must contain lowercase letter. example : xyz@gmail.com
-                  <br />
-                </div>
-              )
-            )}
           </div>
           <div className="input-div">
             <label className="black" htmlFor="userpassword">
@@ -121,6 +119,7 @@ const Register = () => {
               placeholder="Enter Your Password..."
               id="userpassword"
               type="password"
+              autoComplete="off"
               onChange={(e) =>
                 setNewUser((prevState) => ({
                   ...prevState,
@@ -128,17 +127,13 @@ const Register = () => {
                 }))
               }
             />
-            {!newUser.password && (
-              <div className="alert alert-danger">
-                Password field should be filled
-              </div>
-            )}
           </div>
           <button type="submit" className="auth-button">
             Register
           </button>
           <p>
-            Already Registered User ! <a href="/login">Login into your account</a>
+            Already Registered User !{" "}
+            <a href="/login">Login into your account</a>
           </p>
         </form>
       </div>

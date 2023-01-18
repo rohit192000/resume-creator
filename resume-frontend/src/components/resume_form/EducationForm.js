@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 const EducationForm = (props) => {
   // local state for storing and updating input fields values
   const [educationDetail, setEducationDetail] = useState({
@@ -11,7 +11,10 @@ const EducationForm = (props) => {
 
   // works on onChange
   const handleChange = (e, name, index) => {
-    setEducationDetail((prevState) => ({ ...prevState, [name]: e.target.value }));
+    setEducationDetail((prevState) => ({
+      ...prevState,
+      [name]: e.target.value,
+    }));
   };
 
   // work when input field loose focus
@@ -56,6 +59,25 @@ const EducationForm = (props) => {
       }));
     }
   };
+  useEffect(() => {
+    let edu = props.educationDetails[0];
+    if (
+      edu["college/uni"] === "" &&
+      edu["passing_year"] === "" &&
+      edu["marks"] === "" &&
+      edu["graduation"] === false &&
+      edu["post_graduation"] === false
+    ) {
+      setEducationDetail((prevState) => ({
+        "college/uni": "",
+        passing_year: "",
+        marks: "",
+        graduation: false,
+        post_graduation: false,
+      }));
+    }
+  }, [props.educationDetails]);
+
   return (
     <>
       <h3 className="margin-0 margin-bottom-5">Education {props.index + 1}</h3>
@@ -94,19 +116,24 @@ const EducationForm = (props) => {
         onChange={(e) => {
           handleChange(e, e.target.name, props.index);
         }}
+        required
       />
 
       <input
         className="input-field margin-bottom-5"
-        type="text"
+        type="number"
+        min="1"
+        max="10"
+        step="0.01"
         name="marks"
         id="marks"
-        placeholder="Enter Passing Marks"
+        placeholder="Enter Your CGPA | If Not Convert Into CGPA"
         value={educationDetail["marks"]}
         onBlur={(e) => handleBlur(e, e.target.name, props.index)}
         onChange={(e) => {
           handleChange(e, e.target.name, props.index);
         }}
+        required
       />
 
       <fieldset
@@ -146,6 +173,7 @@ const EducationForm = (props) => {
           id="graduation"
           checked={props.educationDetails[props.index]["graduation"]}
           onChange={() => {}}
+          required
         />
         <label htmlFor="graduation">Graduation</label>
         <input
@@ -155,6 +183,7 @@ const EducationForm = (props) => {
           id="post_graduation"
           checked={props.educationDetails[props.index]["post_graduation"]}
           onChange={() => {}}
+          required
         />
         <label htmlFor="post_graduation">Post Graduation</label>
       </fieldset>
