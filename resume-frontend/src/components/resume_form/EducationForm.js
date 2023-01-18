@@ -1,28 +1,33 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 const EducationForm = (props) => {
-  const [collegeRef, setCollegeRef] = useState({
+  // local state for storing and updating input fields values
+  const [educationDetail, setEducationDetail] = useState({
     "college/uni": "",
     passing_year: "",
     marks: "",
     graduation: false,
     post_graduation: false,
   });
+
+  // works on onChange
   const handleChange = (e, name, index) => {
-    setCollegeRef((prevState) => ({ ...prevState, [name]: e.target.value }));
+    setEducationDetail((prevState) => ({ ...prevState, [name]: e.target.value }));
   };
+
+  // work when input field loose focus
   const handleBlur = (e, name, index1) => {
-    console.log(name);
     props.setEducationDetail((prevState) => {
       const newState = prevState.map((obj, index) => {
         if (index === index1) {
-          return { ...obj, [name]: collegeRef[name] };
+          return { ...obj, [name]: educationDetail[name] };
         }
         return obj;
       });
-      console.log(newState);
       return newState;
     });
   };
+
+  // this will remove object from specific array index and delete the field values
   const removeEducation = (index) => {
     console.log(props.count.length);
     if (props.count.length > 1) {
@@ -30,7 +35,6 @@ const EducationForm = (props) => {
       let newCount = props.count.filter((data) => {
         return data !== props.count[index];
       });
-      console.log(newCount);
       props.setCount((prevState) => newCount);
     }
     if (props.count.length === 1) {
@@ -43,7 +47,7 @@ const EducationForm = (props) => {
           post_graduation: false,
         },
       ]);
-      setCollegeRef((prevState) => ({
+      setEducationDetail((prevState) => ({
         "college/uni": "",
         passing_year: "",
         marks: "",
@@ -52,9 +56,6 @@ const EducationForm = (props) => {
       }));
     }
   };
-  useEffect(() => {
-    console.log(props.educationDetails);
-  }, []);
   return (
     <>
       <h3 className="margin-0 margin-bottom-5">Education {props.index + 1}</h3>
@@ -64,12 +65,12 @@ const EducationForm = (props) => {
         type="text"
         list="college"
         name="college/uni"
-        value={collegeRef["college/uni"]}
-        // value={props.educationDetails[props.index]["college/uni"]}
+        value={educationDetail["college/uni"]}
         onBlur={(e) => handleBlur(e, e.target.name, props.index)}
         onChange={(e) => {
           handleChange(e, e.target.name, props.index);
         }}
+        required
       />
       <datalist id="college" name="college">
         <optgroup>
@@ -88,8 +89,7 @@ const EducationForm = (props) => {
         name="passing_year"
         id="passing_year"
         placeholder="Enter your passing year"
-        value={collegeRef["passing_year"]}
-        // value={props.educationDetails[props.index]["college/uni"]}
+        value={educationDetail["passing_year"]}
         onBlur={(e) => handleBlur(e, e.target.name, props.index)}
         onChange={(e) => {
           handleChange(e, e.target.name, props.index);
@@ -102,8 +102,7 @@ const EducationForm = (props) => {
         name="marks"
         id="marks"
         placeholder="Enter Passing Marks"
-        value={collegeRef["marks"]}
-        // value={props.educationDetails[props.index]["college/uni"]}
+        value={educationDetail["marks"]}
         onBlur={(e) => handleBlur(e, e.target.name, props.index)}
         onChange={(e) => {
           handleChange(e, e.target.name, props.index);
@@ -113,7 +112,6 @@ const EducationForm = (props) => {
       <fieldset
         className="personal-detail-fieldset margin-bottom-5"
         onChange={(e) => {
-          console.log(e.target.value);
           if (e.target.value === "graduation") {
             props.setEducationDetail((prevState) => {
               const newState = prevState.map((obj, index) => {
@@ -122,7 +120,6 @@ const EducationForm = (props) => {
                 }
                 return obj;
               });
-              console.log(newState);
               return newState;
             });
           } else {
@@ -136,7 +133,6 @@ const EducationForm = (props) => {
                 }
                 return obj;
               });
-              console.log(newState);
               return newState;
             });
           }

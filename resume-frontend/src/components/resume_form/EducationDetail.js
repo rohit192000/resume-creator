@@ -28,45 +28,7 @@ const EducationDetail = () => {
           post_graduation: false,
         },
       ]);
-      console.log("edSatteOnFunction : ", educationDetails);
     }
-    console.log(count);
-  };
-
-  // const removeEducation = (index) => {
-  //   console.log(count.length);
-  //   if (count.length > 1) {
-  //     educationDetails.splice(index, 1);
-  //     let newCount = count.filter((data) => {
-  //       return data !== count[index];
-  //     });
-  //     console.log(newCount);
-  //     setCount((prevState) => newCount);
-  //   }
-  //   if (count.length === 1) {
-  //     setEducationDetail((prevState) => [
-  //       {
-  //         "college/uni": "",
-  //         passing_year: "",
-  //         marks: "",
-  //         graduation: false,
-  //         post_graduation: false,
-  //       },
-  //     ]);
-  //   }
-  // };
-  const handleChange = (e, name, index1) => {
-    console.log(name);
-    setEducationDetail((prevState) => {
-      const newState = prevState.map((obj, index) => {
-        if (index === index1) {
-          return { ...obj, [name]: e.target.value };
-        }
-        return obj;
-      });
-      console.log(newState);
-      return newState;
-    });
   };
   const [educationDetails, setEducationDetail] = useState([
     {
@@ -80,7 +42,7 @@ const EducationDetail = () => {
 
   const addEducation = (e) => {
     e.preventDefault();
-    console.log(educationDetails);
+    console.log(educationDetails)
   };
   return (
     <>
@@ -241,7 +203,6 @@ const EducationDetail = () => {
                 names={names}
                 addCount={addCount}
                 setCount={setCount}
-                // removeEducation={removeEducation}
                 index={index}
               />
             ))}
