@@ -2,12 +2,8 @@ const Personal_Detail = require("../model/personal_detail");
 
 const experienceController = async (req, res, next) => {
   try {
-    var experience = [
-      {
-        company_name: "MVT",
-        year_of_experience: 4,
-      },
-    ];
+    var experience = req.body;
+    console.log(req.body)
     experience = JSON.stringify(experience);
     console.log(experience);
     var resp = await Personal_Detail

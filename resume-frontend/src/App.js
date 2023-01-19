@@ -31,6 +31,12 @@ const Experience = lazy(() => {
     new Promise((resolve) => setTimeout(resolve, 500)),
   ]).then(([moduleExports]) => moduleExports);
 });
+const Stepper = lazy(() => {
+  return Promise.all([
+    import("./components/resume_form/Stepper"),
+    new Promise((resolve) => setTimeout(resolve, 500)),
+  ]).then(([moduleExports]) => moduleExports);
+});
 function App() {
   return (
     <div className="App">
@@ -43,6 +49,7 @@ function App() {
             <Route path="/personal-detail" element={<PersonalDetail />} />
             <Route path="/education-detail" element={<EducationDetail />} />
             <Route path="/experience" element={<Experience />} />
+            <Route path="/stepper" element={<Stepper />} />
           </Routes>
         </Suspense>
       </Router>

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import ExperienceForm from "./ExperienceForm";
-// import axios from "axios";
+import axios from "axios";
 const Experience = () => {
   const [experience, setExperience] = useState([
     {
@@ -28,6 +28,26 @@ const Experience = () => {
   const addExperience = (e) => {
     e.preventDefault();
     console.log(experience);
+    console.log("1")
+    let token = localStorage.getItem("token");
+    axios
+    .post("http://localhost:3001/personal-detail/experience", experience, {
+      headers: {
+        "Authorization": "Bearer " + token,
+      },
+    })
+    .then(async (response) => {
+      console.log(response);
+      alert(response.data.message);
+      await setCount(prevState => [1])
+      await setExperience((prevState) => [{
+        company_name: "",
+        year_of_experience: "",
+      }]);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
   };
   return (
     <>
@@ -37,7 +57,7 @@ const Experience = () => {
           <div className="education-form-div">
             {count.map((data, index) => (
               <ExperienceForm
-                key={index}
+                key={count[index]}
                 experience={experience}
                 setExperience={setExperience}
                 addExperience={addExperience}

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 const ExperienceForm = (props) => {
   // local state for storing and updating input fields values
   const [experience, setExperience] = useState({
@@ -26,12 +26,14 @@ const ExperienceForm = (props) => {
 
   // this will remove object from specific array index and delete the field values
   const removeExperience = (index) => {
-    console.log(props.count.length);
+    // console.log(props.count.length);
     if (props.count.length > 1) {
+      // console.log(index);
       props.experience.splice(index, 1);
       let newCount = props.count.filter((data) => {
         return data !== props.count[index];
       });
+      // console.log(newCount)
       props.setCount((prevState) => newCount);
     }
     if (props.count.length === 1) {
@@ -47,6 +49,19 @@ const ExperienceForm = (props) => {
       }));
     }
   };
+
+  useEffect(() => {
+    let exp = props.experience[0];
+    if (
+      exp["company_name"] === "" &&
+      exp["year_of_experience"] === "" && props.count.length === 1
+    ) {
+      setExperience((prevState) => ({
+        company_name: "",
+        year_of_experience: "",
+      }));
+    }
+  }, [props.experience]);
 
   return (
     <>

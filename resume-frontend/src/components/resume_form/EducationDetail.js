@@ -74,7 +74,7 @@ const EducationDetail = () => {
           <div className="education-form-div">
             {count.map((data, index) => (
               <EducationForm
-                key={index}
+                key={count[index]}
                 educationDetails={educationDetails}
                 setEducationDetail={setEducationDetail}
                 addEducation={addEducation}

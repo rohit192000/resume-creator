@@ -32,7 +32,7 @@ const EducationForm = (props) => {
 
   // this will remove object from specific array index and delete the field values
   const removeEducation = (index) => {
-    console.log(props.count.length);
+    // console.log(props.count.length);
     if (props.count.length > 1) {
       props.educationDetails.splice(index, 1);
       let newCount = props.count.filter((data) => {
@@ -66,7 +66,8 @@ const EducationForm = (props) => {
       edu["passing_year"] === "" &&
       edu["marks"] === "" &&
       edu["graduation"] === false &&
-      edu["post_graduation"] === false
+      edu["post_graduation"] === false &&
+      props.count.length === 1
     ) {
       setEducationDetail((prevState) => ({
         "college/uni": "",
