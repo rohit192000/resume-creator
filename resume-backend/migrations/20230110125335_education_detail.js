@@ -9,7 +9,7 @@ exports.up = function (knex) {
       .inTable("user")
       .onUpdate("RESTRICT")
       .onDelete("RESTRICT");
-    table.string("college/uni", 50).notNullable();
+    table.string("college/uni", 255).notNullable();
     table.integer("passing_year").notNullable();
     table.float("marks").notNullable();
     table.boolean("graduation").default(false).notNullable();

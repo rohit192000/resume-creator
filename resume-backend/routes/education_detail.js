@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const passport = require("passport");
 const educationDetailController = require("../controllers/education_detail");
+const { FetchEducationalDetail } = require("../controllers/fetchdetails");
 const auth = require("../middleware/auth");
 const College_Detail = require("../model/college");
 router.post(
@@ -24,4 +25,7 @@ router.get("/college-names", async (req, res, next) => {
     console.log(err);
   }
 });
+
+router.get('/getdata', FetchEducationalDetail);
+
 module.exports = router;

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import EducationForm from "./EducationForm";
-const EducationDetail = () => {
+const EducationDetail = (props) => {
   const [names, setNames] = useState([]);
   useEffect(() => {
     axios
@@ -43,9 +43,10 @@ const EducationDetail = () => {
   const addEducation = async (e) => {
     e.preventDefault();
     console.log(educationDetails);
+    // return false;
     let token = localStorage.getItem("token");
     axios
-      .post("http://localhost:3001/education-detail", educationDetails, {
+    .post("http://localhost:3001/education-detail", educationDetails, {
         headers: {
           Authorization: "Bearer " + token,
         },
@@ -61,6 +62,7 @@ const EducationDetail = () => {
           graduation: false,
           post_graduation: false,
         }]);
+        props.setCurrentStep(prevState => 2);
       })
       .catch((err) => {
         console.log(err);

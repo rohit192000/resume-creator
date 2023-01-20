@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-const PersonalDetail = () => {
+const PersonalDetail = (props) => {
   const navi = useNavigate();
   const errorRef = useRef();
   // STATE TO STORE PERSONAL DETAIL
@@ -30,6 +30,7 @@ const PersonalDetail = () => {
   const submitPersonalDetail = async (e) => {
     e.preventDefault();
     console.log(personalDetail);
+    // return false;
     if (
       personalDetail["name"] === "" ||
       personalDetail["email"] === "" ||
@@ -70,6 +71,7 @@ const PersonalDetail = () => {
           }));
           await setErrMsg((prevState) => "");
           alert(response.data.message);
+          props.setCurrentStep(prevState => 1);
         } else {
           await setErrMsg((prevState) => response.data.message);
           // errorRef.current.style.display = "block";

@@ -37,6 +37,13 @@ const Stepper = lazy(() => {
     new Promise((resolve) => setTimeout(resolve, 500)),
   ]).then(([moduleExports]) => moduleExports);
 });
+const DetailTable = lazy(() => {
+  return Promise.all([
+    import("./components/resume_templates/DetailsTable"),
+    new Promise((resolve) => setTimeout(resolve, 500)),
+  ]).then(([moduleExports]) => moduleExports);
+});
+
 function App() {
   return (
     <div className="App">
@@ -45,11 +52,12 @@ function App() {
           <Routes>
             {/*Register anb logn Routes */}
             <Route path="/" element={<Register />} />
-            <Route path="/login" element={<Login />} />
+            <Route path="/login" element={<Login />} />{/**
             <Route path="/personal-detail" element={<PersonalDetail />} />
             <Route path="/education-detail" element={<EducationDetail />} />
-            <Route path="/experience" element={<Experience />} />
+            <Route path="/experience" element={<Experience />} /> */}
             <Route path="/stepper" element={<Stepper />} />
+            <Route path="/all-details" element={<DetailTable />} />
           </Routes>
         </Suspense>
       </Router>

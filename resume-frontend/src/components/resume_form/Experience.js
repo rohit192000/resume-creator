@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import ExperienceForm from "./ExperienceForm";
 import axios from "axios";
 const Experience = () => {
+  const navi = useNavigate();
   const [experience, setExperience] = useState([
     {
       company_name: "",
@@ -27,6 +29,7 @@ const Experience = () => {
   };
   const addExperience = (e) => {
     e.preventDefault();
+    // return false;
     console.log(experience);
     console.log("1")
     let token = localStorage.getItem("token");
@@ -38,12 +41,14 @@ const Experience = () => {
     })
     .then(async (response) => {
       console.log(response);
-      alert(response.data.message);
+      // alert(response.data.message);
       await setCount(prevState => [1])
       await setExperience((prevState) => [{
         company_name: "",
         year_of_experience: "",
       }]);
+      console.log("Go")
+      navi('/all-details');
     })
     .catch((err) => {
       console.log(err);
