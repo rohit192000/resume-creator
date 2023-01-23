@@ -70,8 +70,8 @@ const EducationDetail = (props) => {
   };
   return (
     <>
-      <div className="education-detail bg-lt-purple ">
-        <h1 className="white">Education Detail</h1>
+      <div className="education-detail bg-biege">
+        <h1 className="black">Education Detail</h1>
         <form className="education-form bg-white " onSubmit={addEducation}>
           <div className="education-form-div">
             {count.map((data, index) => (

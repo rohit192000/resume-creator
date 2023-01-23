@@ -1,6 +1,7 @@
 import React, { lazy, Suspense } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
+import Template1 from "./components/resume_templates/Template1";
 const Register = lazy(() => {
   return Promise.all([
     import("./components/authentication/Register"),
@@ -43,7 +44,6 @@ const DetailTable = lazy(() => {
     new Promise((resolve) => setTimeout(resolve, 500)),
   ]).then(([moduleExports]) => moduleExports);
 });
-
 function App() {
   return (
     <div className="App">
@@ -56,8 +56,9 @@ function App() {
             <Route path="/personal-detail" element={<PersonalDetail />} />
             <Route path="/education-detail" element={<EducationDetail />} />
             <Route path="/experience" element={<Experience />} /> */}
-            <Route path="/stepper" element={<Stepper />} />
+            <Route path="/add-detail" element={<Stepper />} />
             <Route path="/all-details" element={<DetailTable />} />
+            <Route path="/template-1" element={<Template1 />} />
           </Routes>
         </Suspense>
       </Router>

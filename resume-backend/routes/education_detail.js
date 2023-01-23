@@ -15,7 +15,7 @@ router.get("/college-names", async (req, res, next) => {
   try {
     var names = await new College_Detail().fetchPage({
       columns: ["college_name"],
-      limit : 100
+      limit: 100,
     });
 
     res.status(200).json({
@@ -26,6 +26,10 @@ router.get("/college-names", async (req, res, next) => {
   }
 });
 
-router.get('/getdata', FetchEducationalDetail);
+router.get(
+  "/getdata",
+  passport.authenticate("jwt", { session: false }),
+  FetchEducationalDetail
+);
 
 module.exports = router;

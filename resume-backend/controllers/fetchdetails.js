@@ -16,7 +16,20 @@ const FetchPersonalDetail = async (req, res, next) => {
         next();
       }
 };
-
-const FetchEducationalDetail = async (req, res, next) => {};
+const FetchEducationalDetail = async (req, res, next) => {
+  try {
+      console.log("request");
+      await Education_Detail.where({
+        user_id: req.user.id,
+      }).fetchAll().then((response) => {
+          res.json({
+              message : response.toJSON()
+          })
+      })
+    } catch (err) {
+      console.log(err);
+      next();
+    }
+};
 
 module.exports = { FetchEducationalDetail, FetchPersonalDetail };

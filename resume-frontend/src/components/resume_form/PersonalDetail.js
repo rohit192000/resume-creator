@@ -93,8 +93,8 @@ const PersonalDetail = (props) => {
 
   return (
     <>
-      <div className="personal-detail bg-lt-purple">
-        <h1 className="white container">Personal Detail</h1>
+      <div className="personal-detail bg-biege">
+        <h1 className="black container">Personal Detail</h1>
         <form className="detail-form bg-white " onSubmit={submitPersonalDetail}>
           {errorMessage && (
             <React.Fragment>
