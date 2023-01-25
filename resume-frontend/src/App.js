@@ -1,7 +1,9 @@
 import React, { lazy, Suspense } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
+import Template from "./components/resume_templates/Template";
 import Template1 from "./components/resume_templates/Template1";
+import Template2 from "./components/resume_templates/Template2";
 const Register = lazy(() => {
   return Promise.all([
     import("./components/authentication/Register"),
@@ -58,7 +60,9 @@ function App() {
             <Route path="/experience" element={<Experience />} /> */}
             <Route path="/add-detail" element={<Stepper />} />
             <Route path="/all-details" element={<DetailTable />} />
+            <Route path="/template" element={<Template />} />
             <Route path="/template-1" element={<Template1 />} />
+            <Route path="/template-2" element={<Template2 />} />
           </Routes>
         </Suspense>
       </Router>

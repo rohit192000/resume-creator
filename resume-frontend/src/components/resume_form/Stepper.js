@@ -26,16 +26,18 @@ const Stepper = (props) => {
         style={{
           background: "#F7C873",
           position: "absolute",
-          width: "5%",
-          fontSize : '100%',
+          width: "10%",
+          fontSize: "100%",
           cursor: "pointer",
-          left : '1%',
-          color : 'white',
-          borderRadius : '10px'
+          left: "1%",
+          color: "white",
+          borderRadius: "10px",
+          padding : '20px,30px',
+          fontWeight : 'bolder'
         }}
         onClick={() => window.history.back()}
       >
-        Back
+        All Detail
       </div>
       <div className="stepper-forms-left" onClick={leftNav}>
         &lt;

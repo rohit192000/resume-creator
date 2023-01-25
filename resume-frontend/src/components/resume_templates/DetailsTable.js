@@ -1,16 +1,19 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Template from "./Template";
 
 const DetailTable = (props) => {
   const navi = useNavigate();
+  const tableRef = useRef(null);
+  const [template, setTemplate] = useState(false);
   var token = localStorage.getItem("token");
   const [personalDetail, setPersonalDetail] = useState({
     name: "",
     email: "",
     phone_number: "",
     gender: "",
-    date_of_birth : "",
+    date_of_birth: "",
     experience: [],
   });
   const [educationDetails, setEducationDetail] = useState([
@@ -37,7 +40,7 @@ const DetailTable = (props) => {
           email: exp["email"],
           phone_number: exp["phone_number"],
           gender: exp["gender"],
-          date_of_birth : exp["date_of_birth"],
+          date_of_birth: exp["date_of_birth"],
           experience: JSON.parse(exp["experience"]),
         }));
       });
@@ -52,11 +55,19 @@ const DetailTable = (props) => {
         setEducationDetail((prevState) => exp);
       });
   }, []);
-  //   console.log(personalDetail.experience[0].company_name);
+    console.log(personalDetail);
   return (
     <>
-      <div className="detail-table">
-        <h2 style={{color : "#333333", fontFamily:"Georgia, 'Times New Roman', Times, serif", marginTop : 0}}>Personal Detail</h2>
+      <div className="detail-table" ref={tableRef}>
+        <h2
+          style={{
+            color: "#333333",
+            fontFamily: "Georgia, 'Times New Roman', Times, serif",
+            marginTop: 0,
+          }}
+        >
+          Personal Detail
+        </h2>
         <table className="personal-detail-table">
           <thead className="table-header">
             <tr>
@@ -78,7 +89,14 @@ const DetailTable = (props) => {
           </tbody>
         </table>
 
-        <h2 style={{color : "#333333", fontFamily:"Georgia, 'Times New Roman', Times, serif"}}>Experience Detail</h2>
+        <h2
+          style={{
+            color: "#333333",
+            fontFamily: "Georgia, 'Times New Roman', Times, serif",
+          }}
+        >
+          Experience Detail
+        </h2>
         <table className="personal-detail-table">
           <thead className="table-header">
             <tr>
@@ -100,7 +118,14 @@ const DetailTable = (props) => {
           </tbody>
         </table>
 
-        <h2 style={{color : "#333333", fontFamily:"Georgia, 'Times New Roman', Times, serif"}}>Educational Detail</h2>
+        <h2
+          style={{
+            color: "#333333",
+            fontFamily: "Georgia, 'Times New Roman', Times, serif",
+          }}
+        >
+          Educational Detail
+        </h2>
         <table className="personal-detail-table">
           <thead className="table-header">
             <tr>
@@ -125,10 +150,27 @@ const DetailTable = (props) => {
           </tbody>
         </table>
         <div className="add-detail-buttons">
-          <button className="detail-button" type="button">Generate Resume</button>
-          <button className="detail-button" type="button" onClick={() => navi('/add-detail')}>Add Details</button>
+          <button
+            className="detail-button"
+            type="button"
+            onClick={() => {
+              tableRef.current.style.display = "none";
+              setTemplate(prevState => true)
+              // console.log(personalDetail)
+            }}
+          >
+            Generate Resume
+          </button>
+          <button
+            className="detail-button"
+            type="button"
+            onClick={() => navi("/add-detail")}
+          >
+            Add Details
+          </button>
         </div>
       </div>
+      {template && (<Template personalDetail={personalDetail} educationDetails={educationDetails}/>)}
     </>
   );
 };

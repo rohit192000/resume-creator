@@ -79,8 +79,8 @@
   color: rgb(255, 255, 255);
 }
 /* background color */
-.bg-biege{
-  background-color: #FAEBCD;
+.bg-biege {
+  background-color: #faebcd;
 }
 .bg-black {
   background-color: #000000;
@@ -341,7 +341,7 @@
   width: 8%;
   border-top: 2px solid #000;
   border-left: 2px solid #000;
-  border-bottom: 2px solid className="table-header" #767676;
+  border-bottom: 2px solid className= "table-header" #767676;
   border-right: 0;
   border-radius: 7px;
   border-top-right-radius: 0;
@@ -421,8 +421,8 @@
   margin: 10px;
 }
 /* All Deatils Table */
-.detail-table{
-  background-color: #FAEBCD;
+.detail-table {
+  background-color: #faebcd;
   height: 100vh;
   margin: 0px;
   padding-top: 10px;
@@ -434,15 +434,15 @@
   /* background-color: rgb(49, 49, 49); */
 }
 
-.table-header{
+.table-header {
   background-color: #333333;
   color: rgb(255, 255, 255);
-  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-family: Georgia, "Times New Roman", Times, serif;
 }
-.table-body{
+.table-body {
   background-color: white;
   font-weight: 200;
-  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-family: Georgia, "Times New Roman", Times, serif;
 }
 .add-detail-buttons {
   margin-top: 3%;
@@ -463,54 +463,139 @@
 }
 
 
+.template{
+  display: flex;
+  flex-wrap: wrap;
+}
+
 /* Template 1 */
 
-
-.template-1{
+.template-1 {
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-start;
   align-items: center;
   flex-direction: column;
-  width: 50%;
-  height: 90vh;
+  /* box-sizing: border-box; */
+  width: 700px;
+  height: 850px;
+  padding-top: 2%;
   margin: 2% auto;
-  background-color: #F5F5F5;
+  background-color: #f5f5f5;
+  box-shadow: inset 5px 5px #fff, inset -5px -5px #fff;
 }
-.temp1-name{
-  display: flex;
-  align-items: flex-start;
-  width: 90%;
-  font-weight: bolder;
-  font-family: Georgia, 'Times New Roman', Times, serif;
-  font-size: 42px;
-  text-align: left;
-  box-sizing: border-box;
-}
-.designation{
+.designation {
+  margin: 0;
   font-weight: 700;
   font-size: 18px;
-  position: absolute;
-  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
 }
 
-.divider{
-  height: .5%;
+.divider {
+  height: 1px;
+  margin-top: 3%;
   width: 90%;
   background-color: red;
-  margin: 0px;
 }
 
+.fields {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  padding-top: 3%;
+  font-weight: lighter;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  text-align: left;
+  box-sizing: border-box;
+  padding-left: 50px;
+  padding-right: 50px;
+  width: 100%;
+  margin-top: 0;
+}
 
+.field-values {
+  /* font-weight: 500; */
+  display: flex;
+  gap: 20px;
+  padding-bottom: 10px;
+  /* row-gap: 100px; */
+}
+.field-header{
+  padding: 1%;
+  width: 100%;
+  background-color: #fce2cd;
+}
 
+/* Template 1 */
 
+.template-2 {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 700px;
+  height: 890px;
+  margin: 2% auto;
+  /* box-shadow: 5px 5px 15px 1px black; */
+  box-shadow: inset 5px 5px #fff, inset -5px -5px #fff;
+}
 
+.side-bar{
+  box-sizing: border-box;
+  margin: 0;
+  padding-top: 6%;
+  height: 100%;
+  width : 35%;
+  border-right: 1px solid black;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  color: #fff;
+  background-color: rgb(52, 123, 255);
+}
 
+.temp2-name{
+  margin: 0;
+}
+.personal-info>.header{
+  color: black;
+  background-color: rgb(255, 255, 255);
+}
 
+.personal-info>.list{
+  padding-left: 20px;
+  list-style: none;
+  text-align: left;
+}
 
+.personal-info>.list>li{
+  padding-bottom: 10px;
 
+}
 
+.other-details{
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  padding-top: 5%;
+  height: 100%;
+  background-color: #ffffff;
+  width : 65%;
+  font-family: Georgia, 'Times New Roman', Times, serif;
 
+}
 
+.temp2-divider {
+  height: 1px;
+  margin-top: 1.5%;
+  background-color: rgb(0, 0, 0);
+}
+.temp2-experience{
+  display: flex;
+  justify-content: flex-start;
+  padding: 1% 2% 1% 2%;
+}
+.exp-detail{
+  display: flex;
+  justify-content: space-between;
+  padding: 3% 3% 0px 3%;
+}
 
 /* @media (width <= 425px) {
   .register-form {
