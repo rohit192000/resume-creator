@@ -433,7 +433,13 @@
   width: 90%;
   /* background-color: rgb(49, 49, 49); */
 }
+.input-fields {
+  border: none;
+}
 
+.input-fields:focus {
+  outline: none;
+}
 .table-header {
   background-color: #333333;
   color: rgb(255, 255, 255);
@@ -446,6 +452,15 @@
 }
 .add-detail-buttons {
   margin-top: 3%;
+}
+/* edit and save buttons */
+.edit-save-button {
+  position: absolute;
+  top: 3%;
+  left: 85%;
+  width: 20%;
+  display: flex;
+  gap: 1%;
 }
 .detail-button {
   background-color: #2e7d32;
@@ -461,9 +476,16 @@
 .detail-button:hover {
   box-shadow: 1px 1px rgb(59, 59, 59), -1px -1px rgb(124, 123, 123);
 }
+.ed-save-btn {
+  background-color: rgb(68, 180, 255);
+  /* border-radius: 0px; */
+  box-shadow: 1px 1px rgb(59, 59, 59), -1px -1px rgb(124, 123, 123);
+}
+.ed-save-btn:hover {
+  box-shadow: .5px .5px rgb(59, 59, 59), -.5px -.5px rgb(124, 123, 123);
+}
 
-
-.template{
+.template {
   display: flex;
   flex-wrap: wrap;
 }
@@ -519,7 +541,7 @@
   padding-bottom: 10px;
   /* row-gap: 100px; */
 }
-.field-header{
+.field-header {
   padding: 1%;
   width: 100%;
   background-color: #fce2cd;
@@ -538,47 +560,47 @@
   box-shadow: inset 5px 5px #fff, inset -5px -5px #fff;
 }
 
-.side-bar{
+.side-bar {
   box-sizing: border-box;
   margin: 0;
   padding-top: 6%;
   height: 100%;
-  width : 35%;
+  width: 40%;
   border-right: 1px solid black;
-  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-family: Georgia, "Times New Roman", Times, serif;
   color: #fff;
   background-color: rgb(52, 123, 255);
 }
 
-.temp2-name{
+.temp2-name {
   margin: 0;
 }
-.personal-info>.header{
+.personal-info > .header {
   color: black;
   background-color: rgb(255, 255, 255);
 }
 
-.personal-info>.list{
-  padding-left: 20px;
+.personal-info > .list {
+  padding-left: 10px;
   list-style: none;
   text-align: left;
+  text-overflow: clip;
 }
 
-.personal-info>.list>li{
+.personal-info > .list > li {
   padding-bottom: 10px;
-
+  text-overflow: clip;
 }
 
-.other-details{
+.other-details {
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   padding-top: 5%;
   height: 100%;
   background-color: #ffffff;
-  width : 65%;
-  font-family: Georgia, 'Times New Roman', Times, serif;
-
+  width: 75%;
+  font-family: Georgia, "Times New Roman", Times, serif;
 }
 
 .temp2-divider {
@@ -586,26 +608,22 @@
   margin-top: 1.5%;
   background-color: rgb(0, 0, 0);
 }
-.temp2-experience{
+.temp2-experience {
   display: flex;
   justify-content: flex-start;
   padding: 1% 2% 1% 2%;
 }
-.exp-detail{
+.exp-detail {
   display: flex;
-  justify-content: space-between;
+  gap: 10%;
   padding: 3% 3% 0px 3%;
 }
 
-/* @media (width <= 425px) {
-  .register-form {
-    width: calc(100% - 10%);
-  }
-  .auth-button {
-    font-size: 100%;
-  }
-} */
-
+.icons {
+  height: 30px;
+  width: 30px;
+  cursor: pointer;
+}
 @media (width <= 540px) {
   .register-form {
     width: calc(100% - 20%);

@@ -3,7 +3,6 @@ const router = express.Router();
 const passport = require("passport");
 const educationDetailController = require("../controllers/education_detail");
 const { FetchEducationalDetail } = require("../controllers/fetchdetails");
-const auth = require("../middleware/auth");
 const College_Detail = require("../model/college");
 router.post(
   "/",
