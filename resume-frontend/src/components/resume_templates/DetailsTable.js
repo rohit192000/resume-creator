@@ -7,7 +7,9 @@ import EducationTable from "./EducationTable";
 import ExperienceTable from "./ExperienceTable";
 const DetailTable = (props) => {
   const navi = useNavigate();
+  const [change, setChange] = useState(false);
   const tableRef = useRef(null);
+  const buttonRef = useRef(null);
   const [template, setTemplate] = useState(false);
   var token = localStorage.getItem("token");
   const [personalDetail, setPersonalDetail] = useState({
@@ -100,6 +102,11 @@ const DetailTable = (props) => {
         }
       )
       .then((response) => {
+        if(change){
+          setChange((prevState) => false)
+        }else{
+          setChange(prevState => true);
+        }
       });
   };
 
@@ -133,11 +140,10 @@ const DetailTable = (props) => {
         let edu = response.data.message;
         setEducationDetail((prevState) => edu);
       });
-  }, [deleteEdu]);
-  console.log(personalDetail);
+  }, [change]);
   return (
     <>
-      <div className="edit-save-button">
+      <div className="edit-save-button" ref={buttonRef}>
         <button
           className="detail-button ed-save-btn"
           type="button"
@@ -158,6 +164,16 @@ const DetailTable = (props) => {
         >
           Save
         </button>
+        <button
+        className="detail-button ed-save-btn"
+        type="button"
+        onClick={() => {
+          localStorage.removeItem('token');
+          navi('/login');
+        }}
+      >
+        Logout
+      </button>
       </div>
       <div className="detail-table" ref={tableRef}>
         <h2
@@ -211,6 +227,7 @@ const DetailTable = (props) => {
             type="button"
             onClick={() => {
               tableRef.current.style.display = "none";
+              buttonRef.current.style.display = "none";
               setTemplate((prevState) => true);
               // console.log(personalDetail)
             }}
@@ -230,6 +247,9 @@ const DetailTable = (props) => {
         <Template
           personalDetail={personalDetail}
           educationDetails={educationDetails}
+          tableRef={tableRef}
+          buttonRef={buttonRef}
+          setTemplate={setTemplate}
         />
       )}
     </>

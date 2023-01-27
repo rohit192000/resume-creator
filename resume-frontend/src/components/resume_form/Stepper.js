@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import PersonalDetail from "./PersonalDetail";
 import EducationDetail from "./EducationDetail";
 import Experience from "./Experience";
+import Back from "../../Images/icons/icons8-back-arrow-50.png";
+
 const Stepper = (props) => {
   const [currentStep, setCurrentStep] = useState(0);
   const [steps, setSteps] = useState([
@@ -24,20 +26,33 @@ const Stepper = (props) => {
     <>
       <div
         style={{
-          background: "#F7C873",
-          position: "absolute",
+          display: "flex",
           width: "10%",
+          alignItems: "center",
+          justifyContent: "space-around",
+          position : 'absolute',
+          margin: "0% 0% 0% 1%",
+          paddingTop: "1px",
           fontSize: "100%",
           cursor: "pointer",
-          left: "1%",
-          color: "white",
+          color: "#000",
           borderRadius: "10px",
-          padding : '20px,30px',
-          fontWeight : 'bolder'
+          fontWeight: "bolder",
         }}
-        onClick={() => window.history.back()}
+        onClick={() => {
+          window.history.back();
+        }}
       >
-        All Detail
+        <img
+          style={{
+            width: "20%",
+          }}
+          src={Back}
+          alt="back-to-page"
+        />
+        <span style={{ fontFamily: "fantasy", fontSize: "28px" }}>
+          All Detail
+        </span>
       </div>
       <div className="stepper-forms-left" onClick={leftNav}>
         &lt;

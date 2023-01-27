@@ -71,7 +71,7 @@ const PersonalDetail = (props) => {
           }));
           await setErrMsg((prevState) => "");
           alert(response.data.message);
-          props.setCurrentStep(prevState => 1);
+          // props.setCurrentStep(prevState => 1);
         } else {
           await setErrMsg((prevState) => response.data.message);
           // errorRef.current.style.display = "block";

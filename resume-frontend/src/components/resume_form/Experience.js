@@ -42,7 +42,7 @@ const Experience = () => {
     .then(async (response) => {
       console.log(response);
       // alert(response.data.message);
-      await setCount(prevState => [1])
+      // await setCount(prevState => [1])
       await setExperience((prevState) => [{
         company_name: "",
         year_of_experience: "",

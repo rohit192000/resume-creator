@@ -1,9 +1,8 @@
 import React, { lazy, Suspense } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
+import { PrivateRoute } from "./components/Auth";
 import Template from "./components/resume_templates/Template";
-import Template1 from "./components/resume_templates/Template1";
-import Template2 from "./components/resume_templates/Template2";
 const Register = lazy(() => {
   return Promise.all([
     import("./components/authentication/Register"),
@@ -13,24 +12,6 @@ const Register = lazy(() => {
 const Login = lazy(() => {
   return Promise.all([
     import("./components/authentication/Login"),
-    new Promise((resolve) => setTimeout(resolve, 500)),
-  ]).then(([moduleExports]) => moduleExports);
-});
-const PersonalDetail = lazy(() => {
-  return Promise.all([
-    import("./components/resume_form/PersonalDetail"),
-    new Promise((resolve) => setTimeout(resolve, 500)),
-  ]).then(([moduleExports]) => moduleExports);
-});
-const EducationDetail = lazy(() => {
-  return Promise.all([
-    import("./components/resume_form/EducationDetail"),
-    new Promise((resolve) => setTimeout(resolve, 500)),
-  ]).then(([moduleExports]) => moduleExports);
-});
-const Experience = lazy(() => {
-  return Promise.all([
-    import("./components/resume_form/Experience"),
     new Promise((resolve) => setTimeout(resolve, 500)),
   ]).then(([moduleExports]) => moduleExports);
 });
@@ -54,15 +35,33 @@ function App() {
           <Routes>
             {/*Register anb logn Routes */}
             <Route path="/" element={<Register />} />
-            <Route path="/login" element={<Login />} />{/**
-            <Route path="/personal-detail" element={<PersonalDetail />} />
-            <Route path="/education-detail" element={<EducationDetail />} />
-            <Route path="/experience" element={<Experience />} /> */}
-            <Route path="/add-detail" element={<Stepper />} />
-            <Route path="/all-details" element={<DetailTable />} />
-            <Route path="/template" element={<Template />} />
-            <Route path="/template-1" element={<Template1 />} />
-            <Route path="/template-2" element={<Template2 />} />
+            <Route path="/login" element={<Login />} />
+
+            {/*Resume details routes */}
+            <Route
+              path="/add-detail"
+              element={
+                <PrivateRoute>
+                  <Stepper />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/all-details"
+              element={
+                <PrivateRoute>
+                  <DetailTable />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/template"
+              element={
+                <PrivateRoute>
+                  <Template />
+                </PrivateRoute>
+              }
+            />
           </Routes>
         </Suspense>
       </Router>

@@ -62,7 +62,7 @@ const EducationDetail = (props) => {
           graduation: false,
           post_graduation: false,
         }]);
-        props.setCurrentStep(prevState => 2);
+        // props.setCurrentStep(prevState => 2);
       })
       .catch((err) => {
         console.log(err);

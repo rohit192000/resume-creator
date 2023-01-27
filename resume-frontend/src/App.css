@@ -3,68 +3,12 @@
   margin: 0;
   padding: 0;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
 /* Collor Palettes */
 
-/* radial gradient */
 
-.radial {
-  background: linear-gradient(#85d2d0, #98b7db 50%, #85d2d0);
-}
 /* text-color */
 .black {
   color: #434343;
-}
-
-.m-yellow {
-  color: #f7d44c;
-}
-
-.rose-quartz {
-  color: #f4b9b8;
-}
-
-.spearmint {
-  color: #85d2d0;
-}
-
-.mint {
-  color: #b4f8c8;
 }
 
 .cream {
@@ -84,18 +28,6 @@
 }
 .bg-black {
   background-color: #000000;
-}
-
-.bg-yellow {
-  background-color: #f7d44c;
-}
-
-.bg-rose-quartz {
-  background-color: #f4b9b8;
-}
-
-.bg-spearmint {
-  background-color: #85d2d0;
 }
 
 .bg-lt-purple {
@@ -128,6 +60,7 @@
   align-items: center;
   flex-direction: column;
 }
+
 
 /* authentication */
 
@@ -457,7 +390,7 @@
 .edit-save-button {
   position: absolute;
   top: 3%;
-  left: 85%;
+  left: 78.5%;
   width: 20%;
   display: flex;
   gap: 1%;

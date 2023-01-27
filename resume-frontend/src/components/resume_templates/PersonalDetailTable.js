@@ -1,6 +1,8 @@
 import React from "react";
-import Delete from "../../Images/icons/icons8-trash-48.png";
+import { useNavigate } from "react-router-dom";
+import Edit from "../../Images/icons/icons8-edit-64.png";
 const PersonalDetailTable = (props) => {
+  const navi = useNavigate();
     return (
       <table className="personal-detail-table">
         <thead className="table-header">
@@ -86,7 +88,7 @@ const PersonalDetailTable = (props) => {
               />
             </td>
             <td>
-              <img className="icons" src={Delete} alt="delete-icon" />
+              <img className="icons" src={Edit} alt="delete-icon" onClick={() => navi('/add-detail')}/>
             </td>
           </tr>
         </tbody>
