@@ -2,8 +2,9 @@ import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Template from "./Template";
-import Delete from "../../Images/icons/icons8-trash-48.png";
-import Edit from "../../Images/icons/icons8-edit-64.png";
+import PersonalDetailTable from "./PersonalDetailTable";
+import EducationTable from "./EducationTable";
+import ExperienceTable from "./ExperienceTable";
 const DetailTable = (props) => {
   const navi = useNavigate();
   const tableRef = useRef(null);
@@ -28,6 +29,8 @@ const DetailTable = (props) => {
   ]);
 
   const [disableRead, setRead] = useState(true);
+
+  // update data in table onChange
   const handleEducation = (e, name, index1) => {
     console.log(name);
     setEducationDetail((prevState) => {
@@ -40,6 +43,8 @@ const DetailTable = (props) => {
       return newState;
     });
   };
+
+  // save the updated data in database
   const save = () => {
     console.log(token);
     axios
@@ -62,9 +67,7 @@ const DetailTable = (props) => {
 
   // deletes the experience
   const deleteExp = (index) => {
-    // console.log(index)
     let newExp = personalDetail.experience.filter((data, index1) => {
-      // console.log(index1);
       return index !== index1;
     });
     console.log(newExp);
@@ -97,20 +100,10 @@ const DetailTable = (props) => {
         }
       )
       .then((response) => {
-        console.log(response.data);
-      });
-    axios
-      .get("http://localhost:3001/education-detail/getdata", {
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      })
-      .then((response) => {
-        let exp = response.data.message;
-        setEducationDetail((prevState) => exp);
       });
   };
 
+  // function to get all the data
   useEffect(() => {
     axios
       .get("http://localhost:3001/personal-detail/getdata", {
@@ -137,10 +130,10 @@ const DetailTable = (props) => {
         },
       })
       .then((response) => {
-        let exp = response.data.message;
-        setEducationDetail((prevState) => exp);
+        let edu = response.data.message;
+        setEducationDetail((prevState) => edu);
       });
-  }, []);
+  }, [deleteEdu]);
   console.log(personalDetail);
   return (
     <>
@@ -176,95 +169,11 @@ const DetailTable = (props) => {
         >
           Personal Detail
         </h2>
-        <table className="personal-detail-table">
-          <thead className="table-header">
-            <tr>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Contact</th>
-              <th>Gender</th>
-              <th>Date of Birth</th>
-              <th colSpan={2}>Action</th>
-            </tr>
-          </thead>
-          <tbody className="table-body">
-            <tr>
-              <td>
-                <input
-                  readOnly={disableRead}
-                  className="input-fields"
-                  value={personalDetail.name}
-                  type="text"
-                  onChange={(e) =>
-                    setPersonalDetail((prevState) => ({
-                      ...prevState,
-                      name: e.target.value,
-                    }))
-                  }
-                />
-              </td>
-              <td>
-                <input
-                  readOnly={disableRead}
-                  className="input-fields"
-                  value={personalDetail.email}
-                  type="text"
-                  onChange={(e) =>
-                    setPersonalDetail((prevState) => ({
-                      ...prevState,
-                      email: e.target.value,
-                    }))
-                  }
-                />
-              </td>
-              <td>
-                <input
-                  readOnly={disableRead}
-                  className="input-fields"
-                  value={personalDetail.phone_number}
-                  type="text"
-                  onChange={(e) =>
-                    setPersonalDetail((prevState) => ({
-                      ...prevState,
-                      phone_number: e.target.value,
-                    }))
-                  }
-                />
-              </td>
-              <td>
-                <input
-                  readOnly={disableRead}
-                  className="input-fields"
-                  value={personalDetail.gender}
-                  type="text"
-                  onChange={(e) =>
-                    setPersonalDetail((prevState) => ({
-                      ...prevState,
-                      gender: e.target.value,
-                    }))
-                  }
-                />
-              </td>
-              <td>
-                <input
-                  readOnly={disableRead}
-                  className="input-fields"
-                  value={personalDetail.date_of_birth}
-                  type="text"
-                  onChange={(e) =>
-                    setPersonalDetail((prevState) => ({
-                      ...prevState,
-                      date_of_birth: e.target.value,
-                    }))
-                  }
-                />
-              </td>
-              <td>
-                <img className="icons" src={Delete} alt="delete-icon" />
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <PersonalDetailTable
+          personalDetail={personalDetail}
+          setPersonalDetail={setPersonalDetail}
+          disableRead={disableRead}
+        />
 
         <h2
           style={{
@@ -274,76 +183,12 @@ const DetailTable = (props) => {
         >
           Experience Detail
         </h2>
-        <table className="personal-detail-table">
-          <thead className="table-header">
-            <tr>
-              <th>Company Name</th>
-              <th>Year of Experience</th>
-              <th colSpan={2}>Action</th>
-            </tr>
-          </thead>
-          <tbody className="table-body">
-            {personalDetail &&
-              personalDetail.experience &&
-              personalDetail.experience.map((data, index) => (
-                <React.Fragment key={index}>
-                  <tr>
-                    <td>
-                      <input
-                        readOnly={disableRead}
-                        className="input-fields"
-                        value={data.company_name}
-                        type="text"
-                        onChange={(e) =>
-                          setPersonalDetail((prevState) => ({
-                            ...prevState,
-                            experience: prevState["experience"].map(
-                              (obj, index1) => {
-                                if (index === index1) {
-                                  return {
-                                    ...obj,
-                                    company_name: e.target.value,
-                                  };
-                                }
-                                return obj;
-                              }
-                            ),
-                          }))
-                        }
-                      />
-                    </td>
-                    <td>
-                      <input
-                        readOnly={disableRead}
-                        className="input-fields"
-                        value={data.year_of_experience}
-                        type="text"
-                        onChange={(e) =>
-                          setPersonalDetail((prevState) => ({
-                            ...prevState,
-                            experience: prevState["experience"].map(
-                              (obj, index1) => {
-                                if (index === index1) {
-                                  return {
-                                    ...obj,
-                                    year_of_experience: e.target.value,
-                                  };
-                                }
-                                return obj;
-                              }
-                            ),
-                          }))
-                        }
-                      />
-                    </td>
-                    <td onClick={() => deleteExp(index)}>
-                      <img className="icons" src={Delete} alt="delete-icon" />
-                    </td>
-                  </tr>
-                </React.Fragment>
-              ))}
-          </tbody>
-        </table>
+        <ExperienceTable
+          personalDetail={personalDetail}
+          setPersonalDetail={setPersonalDetail}
+          disableRead={disableRead}
+          deleteExp={deleteExp}
+        />
 
         <h2
           style={{
@@ -353,78 +198,13 @@ const DetailTable = (props) => {
         >
           Educational Detail
         </h2>
-        <table className="personal-detail-table">
-          <thead className="table-header">
-            <tr>
-              <th>College/Uni.</th>
-              <th>Passing Year</th>
-              <th>Passing Marks</th>
-              <th>Graduation</th>
-              <th>Post Graduation</th>
-              <th colSpan={2}>Action</th>
-            </tr>
-          </thead>
-          <tbody className="table-body">
-            {educationDetails &&
-              educationDetails.map((data, index) => (
-                <tr key={index}>
-                  <td>
-                    <input
-                      readOnly={disableRead}
-                      className="input-fields"
-                      value={data["college/uni"]}
-                      name="college/uni"
-                      type="text"
-                      onChange={(e) => handleEducation(e, e.target.name, index)}
-                    />
-                  </td>
-                  <td>
-                    <input
-                      readOnly={disableRead}
-                      className="input-fields"
-                      value={data["passing_year"]}
-                      type="text"
-                      name="passing_year"
-                      onChange={(e) => handleEducation(e, e.target.name, index)}
-                    />
-                  </td>
-                  <td>
-                    <input
-                      readOnly={disableRead}
-                      className="input-fields"
-                      value={data["marks"]}
-                      type="text"
-                      name="marks"
-                      onChange={(e) => handleEducation(e, e.target.name, index)}
-                    />
-                  </td>
-                  <td>
-                    <input
-                      readOnly={disableRead}
-                      className="input-fields"
-                      value={data["graduation"]}
-                      type="text"
-                      name="graduation"
-                      onChange={(e) => handleEducation(e, e.target.name, index)}
-                    />
-                  </td>
-                  <td>
-                    <input
-                      readOnly={disableRead}
-                      className="input-fields"
-                      value={data["post_graduation"]}
-                      type="text"
-                      name="post_graduation"
-                      onChange={(e) => handleEducation(e, e.target.name, index)}
-                    />
-                  </td>
-                  <td onClick={() => deleteEdu(index)}>
-                    <img className="icons" src={Delete} alt="delete-icon" />
-                  </td>
-                </tr>
-              ))}
-          </tbody>
-        </table>
+        <EducationTable
+          educationDetails={educationDetails}
+          disableRead={disableRead}
+          handleEducation={handleEducation}
+          deleteEdu={deleteEdu}
+        />
+
         <div className="add-detail-buttons">
           <button
             className="detail-button"
