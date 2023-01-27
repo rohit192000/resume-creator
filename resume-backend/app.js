@@ -16,6 +16,7 @@ var registerRouter = require("./routes/register");
 var loginRouter = require("./routes/login");
 var personalRouter = require("./routes/personal_details");
 var educationRouter = require("./routes/education_detail")
+var deleteRouter = require("./routes/action")
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
@@ -32,7 +33,8 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/register", registerRouter);
 app.use("/login", loginRouter);
 app.use('/personal-detail', personalRouter);
-app.use("/education-detail", educationRouter)
+app.use("/education-detail", educationRouter);
+app.use("/action", deleteRouter);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));

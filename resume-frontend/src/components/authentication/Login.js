@@ -23,7 +23,7 @@ const Login = () => {
             }));
             alert(response.data.message);
             localStorage.setItem("token", response.data.user.token);
-            navi("/personal-detail");
+            navi("/all-details");
           } else {
             await setErrMsg((prevState) => response.data.message);
             await setUser((prevState) => ({

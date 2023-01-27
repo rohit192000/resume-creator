@@ -3,7 +3,6 @@ const router = express.Router();
 const passport = require("passport");
 const educationDetailController = require("../controllers/education_detail");
 const { FetchEducationalDetail } = require("../controllers/fetchdetails");
-const auth = require("../middleware/auth");
 const College_Detail = require("../model/college");
 router.post(
   "/",
@@ -15,7 +14,7 @@ router.get("/college-names", async (req, res, next) => {
   try {
     var names = await new College_Detail().fetchPage({
       columns: ["college_name"],
-      limit : 100
+      limit: 100,
     });
 
     res.status(200).json({
@@ -26,6 +25,10 @@ router.get("/college-names", async (req, res, next) => {
   }
 });
 
-router.get('/getdata', FetchEducationalDetail);
+router.get(
+  "/getdata",
+  passport.authenticate("jwt", { session: false }),
+  FetchEducationalDetail
+);
 
 module.exports = router;

@@ -3,68 +3,12 @@
   margin: 0;
   padding: 0;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
 /* Collor Palettes */
 
-/* radial gradient */
 
-.radial {
-  background: linear-gradient(#85d2d0, #98b7db 50%, #85d2d0);
-}
 /* text-color */
 .black {
-  color: #000000;
-}
-
-.m-yellow {
-  color: #f7d44c;
-}
-
-.rose-quartz {
-  color: #f4b9b8;
-}
-
-.spearmint {
-  color: #85d2d0;
-}
-
-.mint {
-  color: #b4f8c8;
+  color: #434343;
 }
 
 .cream {
@@ -79,20 +23,11 @@
   color: rgb(255, 255, 255);
 }
 /* background color */
+.bg-biege {
+  background-color: #faebcd;
+}
 .bg-black {
   background-color: #000000;
-}
-
-.bg-yellow {
-  background-color: #f7d44c;
-}
-
-.bg-rose-quartz {
-  background-color: #f4b9b8;
-}
-
-.bg-spearmint {
-  background-color: #85d2d0;
 }
 
 .bg-lt-purple {
@@ -104,7 +39,7 @@
 }
 
 .bg-white {
-  background-color: #ffffff;
+  background-color: #fffbec;
 }
 
 .margin-0 {
@@ -125,6 +60,7 @@
   align-items: center;
   flex-direction: column;
 }
+
 
 /* authentication */
 
@@ -259,7 +195,7 @@
   content: " ";
   position: absolute;
   left: 17.3%;
-  top : 2.5%;
+  top: 2.5%;
   width: 32%;
   height: 3px;
   background-color: rgb(3, 3, 3);
@@ -270,11 +206,30 @@
   content: " ";
   position: absolute;
   right: 17.3%;
-  top : 2.5%;
+  top: 2.5%;
   width: 32%;
   height: 3px;
   background-color: rgb(0, 0, 0);
   z-index: -1;
+}
+
+.stepper-forms-left {
+  position: absolute;
+  color: rgb(110, 110, 110);
+  font-size: 34px;
+  font-weight: bolder;
+  top: 50%;
+  left: 10%;
+  cursor: pointer;
+}
+.stepper-forms-right {
+  position: absolute;
+  color: rgb(110, 110, 110);
+  font-size: 34px;
+  font-weight: bolder;
+  top: 50%;
+  cursor: pointer;
+  right: 10%;
 }
 /* personal_detail.js */
 .personal-detail {
@@ -319,7 +274,7 @@
   width: 8%;
   border-top: 2px solid #000;
   border-left: 2px solid #000;
-  border-bottom: 2px solid #767676;
+  border-bottom: 2px solid className= "table-header" #767676;
   border-right: 0;
   border-radius: 7px;
   border-top-right-radius: 0;
@@ -399,25 +354,209 @@
   margin: 10px;
 }
 /* All Deatils Table */
-
-.personal-detail-table{
-  width: 100%;
-  color: rgb(19, 19, 19);
-  border: 1px solid black;
+.detail-table {
+  background-color: #faebcd;
+  height: 100vh;
+  margin: 0px;
+  padding-top: 10px;
 }
 
+.personal-detail-table {
+  margin: auto;
+  width: 90%;
+  /* background-color: rgb(49, 49, 49); */
+}
+.input-fields {
+  border: none;
+}
 
+.input-fields:focus {
+  outline: none;
+}
+.table-header {
+  background-color: #333333;
+  color: rgb(255, 255, 255);
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+.table-body {
+  background-color: white;
+  font-weight: 200;
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+.add-detail-buttons {
+  margin-top: 3%;
+}
+/* edit and save buttons */
+.edit-save-button {
+  position: absolute;
+  top: 3%;
+  left: 78.5%;
+  width: 20%;
+  display: flex;
+  gap: 1%;
+}
+.detail-button {
+  background-color: #2e7d32;
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 100%;
+  font-weight: bolder;
+  padding: 1% 5%;
+  margin: 0 2%;
+  box-shadow: 2px 2px rgb(124, 123, 123), -2px -2px rgb(124, 123, 123);
+}
+.detail-button:hover {
+  box-shadow: 1px 1px rgb(59, 59, 59), -1px -1px rgb(124, 123, 123);
+}
+.ed-save-btn {
+  background-color: rgb(68, 180, 255);
+  /* border-radius: 0px; */
+  box-shadow: 1px 1px rgb(59, 59, 59), -1px -1px rgb(124, 123, 123);
+}
+.ed-save-btn:hover {
+  box-shadow: .5px .5px rgb(59, 59, 59), -.5px -.5px rgb(124, 123, 123);
+}
 
+.template {
+  display: flex;
+  flex-wrap: wrap;
+}
 
-/* @media (width <= 425px) {
-  .register-form {
-    width: calc(100% - 10%);
-  }
-  .auth-button {
-    font-size: 100%;
-  }
-} */
+/* Template 1 */
 
+.template-1 {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  /* box-sizing: border-box; */
+  width: 700px;
+  height: 850px;
+  padding-top: 2%;
+  margin: 2% auto;
+  background-color: #f5f5f5;
+  box-shadow: inset 5px 5px #fff, inset -5px -5px #fff;
+}
+.designation {
+  margin: 0;
+  font-weight: 700;
+  font-size: 18px;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+}
+
+.divider {
+  height: 1px;
+  margin-top: 3%;
+  width: 90%;
+  background-color: red;
+}
+
+.fields {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  padding-top: 3%;
+  font-weight: lighter;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  text-align: left;
+  box-sizing: border-box;
+  padding-left: 50px;
+  padding-right: 50px;
+  width: 100%;
+  margin-top: 0;
+}
+
+.field-values {
+  /* font-weight: 500; */
+  display: flex;
+  gap: 20px;
+  padding-bottom: 10px;
+  /* row-gap: 100px; */
+}
+.field-header {
+  padding: 1%;
+  width: 100%;
+  background-color: #fce2cd;
+}
+
+/* Template 1 */
+
+.template-2 {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 700px;
+  height: 890px;
+  margin: 2% auto;
+  /* box-shadow: 5px 5px 15px 1px black; */
+  box-shadow: inset 5px 5px #fff, inset -5px -5px #fff;
+}
+
+.side-bar {
+  box-sizing: border-box;
+  margin: 0;
+  padding-top: 6%;
+  height: 100%;
+  width: 40%;
+  border-right: 1px solid black;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  color: #fff;
+  background-color: rgb(52, 123, 255);
+}
+
+.temp2-name {
+  margin: 0;
+}
+.personal-info > .header {
+  color: black;
+  background-color: rgb(255, 255, 255);
+}
+
+.personal-info > .list {
+  padding-left: 10px;
+  list-style: none;
+  text-align: left;
+  text-overflow: clip;
+}
+
+.personal-info > .list > li {
+  padding-bottom: 10px;
+  text-overflow: clip;
+}
+
+.other-details {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  padding-top: 5%;
+  height: 100%;
+  background-color: #ffffff;
+  width: 75%;
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+.temp2-divider {
+  height: 1px;
+  margin-top: 1.5%;
+  background-color: rgb(0, 0, 0);
+}
+.temp2-experience {
+  display: flex;
+  justify-content: flex-start;
+  padding: 1% 2% 1% 2%;
+}
+.exp-detail {
+  display: flex;
+  gap: 10%;
+  padding: 3% 3% 0px 3%;
+}
+
+.icons {
+  height: 30px;
+  width: 30px;
+  cursor: pointer;
+}
 @media (width <= 540px) {
   .register-form {
     width: calc(100% - 20%);

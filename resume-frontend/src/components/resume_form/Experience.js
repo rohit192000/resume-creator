@@ -42,7 +42,7 @@ const Experience = () => {
     .then(async (response) => {
       console.log(response);
       // alert(response.data.message);
-      await setCount(prevState => [1])
+      // await setCount(prevState => [1])
       await setExperience((prevState) => [{
         company_name: "",
         year_of_experience: "",
@@ -56,8 +56,8 @@ const Experience = () => {
   };
   return (
     <>
-      <div className="education-detail bg-lt-purple ">
-        <h1 className="white">Experience Detail</h1>
+      <div className="education-detail bg-biege ">
+        <h1 className="black">Experience Detail</h1>
         <form className="education-form bg-white " onSubmit={addExperience}>
           <div className="education-form-div">
             {count.map((data, index) => (
