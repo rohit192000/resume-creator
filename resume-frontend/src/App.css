@@ -3,22 +3,16 @@
   margin: 0;
   padding: 0;
 }
-/* Collor Palettes */
-
-
 /* text-color */
 .black {
   color: #434343;
 }
-
 .cream {
   color: #f6ecc9;
 }
-
 .white {
   color: #ffffff;
 }
-
 .wood {
   color: rgb(255, 255, 255);
 }
@@ -29,23 +23,18 @@
 .bg-black {
   background-color: #000000;
 }
-
 .bg-lt-purple {
   background-color: #98b7db;
 }
-
 .bg-cream {
   background-color: #f6ecc9;
 }
-
 .bg-white {
   background-color: #fffbec;
 }
-
 .margin-0 {
   margin: 0;
 }
-
 .padding-0 {
   padding: 0;
 }
@@ -60,10 +49,7 @@
   align-items: center;
   flex-direction: column;
 }
-
-
 /* authentication */
-
 .register {
   background-image: linear-gradient(
       to bottom,
@@ -80,9 +66,7 @@
       rgba(50, 50, 78, 0.5)
     ),
     url("./Images/login.jpg");
-  /* background-repeat: no-repeat; */
   background-position: left 20%;
-  /* background-size: cover; */
 }
 .register-form {
   background-clip: padding-box;
@@ -110,9 +94,9 @@
 .input-div {
   padding: 3%;
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  /* display: flex; */
+  /* flex-direction: column;
+  align-items: center; */
 }
 
 .alert {
@@ -124,7 +108,6 @@
   padding: 5px;
   text-align: justify;
   display: none;
-  /* visibility: hidden; */
 }
 .alert-danger {
   background-color: #fc5353;
@@ -139,7 +122,6 @@
   cursor: pointer;
   transition: 0.3s;
 }
-
 .closebtn:hover {
   color: black;
 }
@@ -148,7 +130,12 @@
   border-radius: 10px;
   margin-top: 10%;
 }
-
+.anchor{
+  width : 100%;
+  color : #551A8B;
+  text-decoration : underline;
+  cursor : pointer;
+}
 .input-div > input,
 .auth-button {
   box-shadow: 1px 1px 0.5px 1px #fffefe, -1px -1px 0.5px 1px #ffffff;

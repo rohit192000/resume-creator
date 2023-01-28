@@ -104,8 +104,8 @@ const Login = () => {
           <button type="submit" className="auth-button">
             Login
           </button>
-          <p>
-            New User ! <a href="/">Register Yourself</a>
+          <p onClick={() => navi("/")}>
+            New User ! <span className="anchor">Register Yourself</span>
           </p>
         </form>
       </div>

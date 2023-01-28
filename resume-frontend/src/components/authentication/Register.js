@@ -1,19 +1,29 @@
 import React, { useRef, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+
 const Register = () => {
   const [newUser, setNewUser] = useState({
     name: "",
     email: "",
     password: "",
   });
+  // access the dom to show error messages
   const errorRef = useRef();
+  // navigate to user-specified routes
   const navi = useNavigate();
   const [errorMessage, setErrMsg] = useState("");
   // regex for validations
-  var nameRegex =
-    /^([A-Z]+)([a-z]+){2,10}[\s]+([A-Z]+)([a-z]+){2,10}([\s]*[A-Z]*([a-z]*){2,10})$/;
-
+  var nameRegex = /^([A-Z]+)([a-z]+){2,10}[\s]+([A-Z]+)([a-z]+){2,10}([\s]*[A-Z]*([a-z]*){2,10})$/;
+  // update the input field on type
+  // handleChange(event, setState);
+  const handleChange = (e, callback) => {
+    callback((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }))
+  }
+  // register the user in the database
   const register = async (e) => {
     e.preventDefault();
     if (newUser.name && newUser.email && newUser.password) {
@@ -48,7 +58,6 @@ const Register = () => {
       return (errorRef.current.style.display = "block");
     }
   };
-
   return (
     <>
       <div className="register bg-lt-purple">
@@ -58,8 +67,6 @@ const Register = () => {
               <span
                 className="closebtn"
                 onClick={(e) => {
-                  // console.log(e)
-                  // setErrMsg((prevState) => null);
                   e.target.parentElement.style.display = "none";
                 }}
               >
@@ -74,17 +81,14 @@ const Register = () => {
             </label>
             <input
               className="input-field"
-              name="username"
+              name="name"
               placeholder="Enter Your Full Name..."
               id="username"
               type="text"
               value={newUser.name}
               autoComplete="off"
               onChange={(e) =>
-                setNewUser((prevState) => ({
-                  ...prevState,
-                  name: e.target.value,
-                }))
+                handleChange(e, setNewUser)
               }
             />
           </div>
@@ -94,17 +98,14 @@ const Register = () => {
             </label>
             <input
               className="input-field"
-              name="useremail"
+              name="email"
               value={newUser.email}
               placeholder="Enter Your Email..."
               id="useremail"
               type="text"
               autoComplete="off"
               onChange={(e) =>
-                setNewUser((prevState) => ({
-                  ...prevState,
-                  email: e.target.value,
-                }))
+                handleChange(e, setNewUser)
               }
             />
           </div>
@@ -114,31 +115,27 @@ const Register = () => {
             </label>
             <input
               className="input-field"
-              name="userpassword"
+              name="password"
               value={newUser.password}
               placeholder="Enter Your Password..."
               id="userpassword"
               type="password"
               autoComplete="off"
               onChange={(e) =>
-                setNewUser((prevState) => ({
-                  ...prevState,
-                  password: e.target.value,
-                }))
+                handleChange(e, setNewUser)
               }
             />
           </div>
           <button type="submit" className="auth-button">
             Register
           </button>
-          <p>
+          <p onClick={() => navi("/login")}>
             Already Registered User !{" "}
-            <a href="/login">Login into your account</a>
+            <span className="anchor">Login into your account</span>
           </p>
         </form>
       </div>
     </>
   );
 };
-
 export default Register;
